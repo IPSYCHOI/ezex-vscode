@@ -81,10 +81,11 @@ webviewView.webview.onDidReceiveMessage(async message => {
     const keySequences: string[] = [];
     keySequences.push(`${projectName}\r`);
     if (options.basic) {
+      keySequences.push(options.addFeatures ? '\x1B[B \r' : '\r')
+      keySequences.push(options.git ? '\x1B[B \r' : '\r')
       if (options.addFeatures) {
-        keySequences.push('\x1B[A\r');
         
-        keySequences.push(options.git ? '\x1B[B \r' : '\r')
+        
         
         keySequences.push(
           options.addMongo ? '\x1B[B \r' : '\r',
