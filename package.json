@@ -6,7 +6,10 @@
   "engines": {
     "vscode": "^1.101.0"
   },
-
+"repository": {
+  "type": "git",
+  "url": "https://github.com/IPSYCHOI/ezex-vscode"
+}
   "publisher": "2d7fba3d-6e2e-611d-ad33-3dc43f698bb7",
   "categories": [
     "Other"
