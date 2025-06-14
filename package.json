@@ -9,9 +9,29 @@
   "categories": [
     "Other"
   ],
-  "activationEvents": [],
+  "activationEvents": ["onView:ezexView"],
   "main": "./dist/extension.js",
+  
   "contributes": {
+    
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "ezexSidebar",
+        "title": "ezex",
+        "icon":"./icon.png"
+        }
+      ]
+    },
+    "views": {
+        "ezexSidebar":[
+            {
+                "id": "ezexView",
+                "name": "ezex Scaffolder",
+                "type": "webview"
+            }
+        ]
+    },
     "commands": [
       {
         "command": "ezex.helloWorld",
@@ -44,4 +64,5 @@
     "@vscode/test-cli": "^0.0.10",
     "@vscode/test-electron": "^2.5.2"
   }
+    
 }
