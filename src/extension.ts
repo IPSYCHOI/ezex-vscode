@@ -1,9 +1,18 @@
 import * as vscode from 'vscode';
 import * as fs from 'fs';
 import * as path from 'path';
+import * as cp from 'child_process';
 
 
 export function activate(context: vscode.ExtensionContext) {
+  
+  
+    const terminal = vscode.window.createTerminal('ezex Installer');
+    terminal.show();
+    terminal.sendText('npm install -g ezex');
+    vscode.window.showInformationMessage('Installing ezex CLI globally... Check terminal for progress.');
+  
+
   const provider = new EzexViewProvider(context.extensionUri);
 
   context.subscriptions.push(
