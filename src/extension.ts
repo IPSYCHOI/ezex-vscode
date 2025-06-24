@@ -56,6 +56,7 @@ webviewView.webview.onDidReceiveMessage(async message => {
       placeHolder: 'my-express-app',
       validateInput: (value) => {
         if (!value) return 'Project name is required';
+        if(value==".")return null 
         if (!/^[a-zA-Z0-9 _-]+$/.test(value)) {
       return 'Invalid name (use letters, numbers, spaces, hyphens, or underscores)';
     }
@@ -68,12 +69,18 @@ webviewView.webview.onDidReceiveMessage(async message => {
     sendProgress(webviewView.webview, 20, 'Resolving project path');
     const workspaceFolders = vscode.workspace.workspaceFolders;
     const cwd = workspaceFolders?.[0]?.uri.fsPath || process.cwd();
-    const projectPath = path.join(cwd, projectName);
+    let projectPath
+    if(projectName=="."){
 
-    if (fs.existsSync(projectPath)) {
-      vscode.window.showErrorMessage(`A folder named "${projectName}" already exists in this workspace.`);
-      return;
+      projectPath = path.join(cwd);
+    }else{
+      projectPath = path.join(cwd, projectName);
+      if (fs.existsSync(projectPath)) {
+        vscode.window.showErrorMessage(`A folder named "${projectName}" already exists in this workspace.`);
+        return;
+      }
     }
+    
 
     // 4. Building command
     sendProgress(webviewView.webview, 30, 'Building command');
@@ -92,8 +99,10 @@ webviewView.webview.onDidReceiveMessage(async message => {
     const keySequences: string[] = [];
     keySequences.push(`${projectName}\r`);
     if (options.basic) {
-      keySequences.push(options.addFeatures ? '\x1B[B \r' : '\r')
+      if(projectName!="."){
+        keySequences.push(options.addFeatures ? '\x1B[B \r' : '\r')
       keySequences.push(options.git ? '\x1B[B \r' : '\r')
+      }
       if (options.addFeatures) {
         
         
@@ -107,10 +116,16 @@ webviewView.webview.onDidReceiveMessage(async message => {
       }
       
       else {
-        keySequences.push('\r');
+        if(projectName!="."){
+          keySequences.push('\r');
+        }
       }
     }
-    keySequences.push('\x1B[A\r');
+    if(projectName!="."){
+      keySequences.push('\x1B[A\r');
+    }else{
+      keySequences.push('\r');
+    }
     // 6. Running scaffold command
     sendProgress(webviewView.webview, 50, 'Launching terminal & executing command');
     const terminal = vscode.window.createTerminal('ezex Scaffold');
