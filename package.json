@@ -2,7 +2,7 @@
   "name": "ezex",
   "displayName": "ezex",
   "description": "A VS Code GUI for the ezex Express scaffold CLI tool",
-  "version": "1.4.1",
+  "version": "1.4.2",
   "engines": {
     "vscode": "^1.101.0"
   },
