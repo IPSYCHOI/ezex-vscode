@@ -56,7 +56,9 @@ webviewView.webview.onDidReceiveMessage(async message => {
       placeHolder: 'my-express-app',
       validateInput: (value) => {
         if (!value) return 'Project name is required';
-        if (!/^[a-z0-9-_]+$/i.test(value)) return 'Invalid name (use letters, numbers, hyphens, or underscores)';
+        if (!/^[a-zA-Z0-9 _-]+$/.test(value)) {
+      return 'Invalid name (use letters, numbers, spaces, hyphens, or underscores)';
+    }
         return null;
       }
     });
