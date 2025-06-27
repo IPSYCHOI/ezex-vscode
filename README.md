@@ -41,9 +41,13 @@ Scaffold Express.js projects in seconds — right from VS Code!
 
 1.  
 ![ezex-vscode-example](./images/ezex-vscode-example.png)
-2.
+2. Enter just project Name => making sub folder 
 ![ezex-vscode-example](./images/ezex-vscode-example2.png)
-3.
+3. OR Enter . That mean Here in same folder
+![ezex-vscode-example](./images/dot.png)
+4. or Enter the full path  
+![ezex-vscode-example](./images/fullpath.png)
+5.
 ![ezex-vscode-example](./images/ezex-vscode-example3.png)
 
 ---

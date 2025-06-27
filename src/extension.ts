@@ -57,8 +57,8 @@ webviewView.webview.onDidReceiveMessage(async message => {
       validateInput: (value) => {
         if (!value) return 'Project name is required';
         if(value==".")return null 
-        if (!/^[a-zA-Z0-9 _-]+$/.test(value)) {
-      return 'Invalid name (use letters, numbers, spaces, hyphens, or underscores)';
+        if (/[<>"|?*]/.test(value)) {
+      return 'Invalid character in name or path (no < > : " | ? *)';
     }
         return null;
       }
